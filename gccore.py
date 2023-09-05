@@ -1,11 +1,24 @@
 import numpy as np
 from scipy import stats as sc
+import pandas as pd
+
+
 
 
 class GramCharlier(object):
-    def __init__(self, moments):
-        self.moments = moments
+    def __init__(self):
+        
+        self.moments = None
 
+    def estimate_moments(self, file):
+        df = pd.read_csv(file, sep=';', header=0)
+        self.samples = df.to_numpy()
+        mean = np.mean(self.samples)
+        variance = np.var(self.samples)
+        skewness = sc.skew(self.samples)
+        kurt = sc.kurtosis(self.samples) + 3
+        self.moments = [mean, variance, skewness, kurt]
+        
     def normalized_hermite(self, N):
         plist = [None] * N
         plist[0] = np.poly1d(1)
