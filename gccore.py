@@ -15,8 +15,8 @@ class GramCharlier(object):
         self.samples = df.to_numpy()
         mean = np.mean(self.samples)
         variance = np.var(self.samples)
-        skewness = sc.skew(self.samples)
-        kurt = sc.kurtosis(self.samples) + 3
+        skewness = sc.skew(self.samples)[0]
+        kurt = sc.kurtosis(self.samples)[0] + 3
         self.moments = [mean, variance, skewness, kurt]
         
     def normalized_hermite(self, N):

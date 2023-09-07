@@ -31,6 +31,15 @@ class GCController:
         self.model.estimate_moments(csv_file)
         self.plot()
 
+        i=0
+        for child in self.view.moments_bar.winfo_children():
+
+            if type(child)==tk.Text:
+                child.delete('1.0', tk.END)
+                child.insert(tk.END, '{}'.format(self.model.moments[i]))
+                print(self.model.moments[i])
+                i=i+1
+
     def plot(self,Latex=False,n_bins=None):
 
         if Latex==True:
@@ -60,6 +69,8 @@ class GCController:
                    '''
             plt.rc('text.latex', preamble=preamble)
             plt.rcParams["pgf.preamble"] = preamble
+            for child in self.view.right_frame.winfo_children():
+                child.destroy()
 
         # the figure that will contain the plot
         # list of squares
@@ -78,7 +89,7 @@ class GCController:
             elif n_samples>100:
                 n_bins = 20
 
-        ax[0].hist(self.model.samples, n_bins, rwidth=0.6, color='black', density=True, alpha=0.8, edgecolor='black', linewidth=1.2, label='Empirical')
+        ax[0].hist(self.model.samples, n_bins, rwidth=0.6, color='black', density=True, alpha=0.6, edgecolor='black', linewidth=1.2, label='Empirical')
         ax[0].plot(x, f, color='red', label='Gram-Charlier Expansion')
         ax[0].set_xlim(mu-4*std, mu+4*std)
 
