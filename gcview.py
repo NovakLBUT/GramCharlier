@@ -41,30 +41,36 @@ class GCView:
         self.create_widgets()
 
 
+
+
+
     def config_root(self):
         self.root.title("Gram-Charlier Expansion")
         self.root.geometry("800x500")
         self.root.configure(background='white', pady=15, padx=15)
 
     def create_widgets(self):
+
         self.left_frame = tk.Frame(width=400, height=500, bg='white')
         self.left_frame.pack(side='left', fill='both', padx=10, pady=5, expand=True)
+        self.right_frame = tk.Frame(width=400, height=500, bg='white')
+        self.right_frame.pack(side='right', fill='both', padx=10, pady=5, expand=True)
         self.button_csv = tk.Button(self.left_frame,text='Load .csv', command=self.load_csv)
         self.button_csv.pack(side=tk.TOP,  padx=10, pady=5, anchor=tk.NW)
 
         self.labels_bar=tk.Frame(self.left_frame, width=200,  height=30,  bg='white')
         self.labels_bar.pack(side=tk.TOP, padx=10, pady=5, anchor=tk.NW)
-        self.mean_label=tk.Label(self.labels_bar, text='Mean')
+        self.mean_label=tk.Label(self.labels_bar, text='Mean',  bg='white')
         self.mean_label.pack(side=tk.LEFT, padx=5)
-        self.variance_label=tk.Label(self.labels_bar, text='Variance')
+        self.variance_label=tk.Label(self.labels_bar, text='Variance',  bg='white')
         self.variance_label.pack(side=tk.LEFT, padx=5)
-        self.skew_label=tk.Label(self.labels_bar, text='Skewness')
+        self.skew_label=tk.Label(self.labels_bar, text='Skewness',  bg='white')
         self.skew_label.pack(side=tk.LEFT, padx=5)
-        self.kurt_label=tk.Label(self.labels_bar, text='Kurtosis')
+        self.kurt_label=tk.Label(self.labels_bar, text='Kurtosis',  bg='white')
         self.kurt_label.pack(side=tk.LEFT, padx=5)
 
         self.moments_bar=tk.Frame(self.left_frame, width=200,  height=30,  bg='white')
-        self.moments_bar.pack(side=tk.TOP, padx=5, pady=5, anchor=tk.NW)
+        self.moments_bar.pack(side=tk.TOP, padx=5, pady=0, anchor=tk.NW)
         self.text_box_mean=tk.Text(self.moments_bar, width=5, height=1)
         self.text_box_mean.pack(side=tk.LEFT, padx=5)
         self.text_box_variance = tk.Text(self.moments_bar, width=5, height=1)
@@ -74,10 +80,31 @@ class GCView:
         self.text_box_kurt = tk.Text(self.moments_bar, width=5, height=1)
         self.text_box_kurt.pack(side=tk.LEFT, padx=4)
 
+        self.labels_bar2 = tk.Frame(self.left_frame, width=200, height=30, bg='white')
+        self.labels_bar2.pack(side=tk.TOP, padx=5, pady=5, anchor=tk.NW)
+        self.alpha_label = tk.Label(self.labels_bar2, text='alpha', bg='white')
+        self.alpha_label.pack(side=tk.LEFT, padx=5)
+        self.beta_label = tk.Label(self.labels_bar2, text='beta', bg='white')
+        self.beta_label.pack(side=tk.LEFT, padx=15)
+        self.gamma_label = tk.Label(self.labels_bar2, text='gamma', bg='white')
+        self.gamma_label.pack(side=tk.LEFT, padx=15)
+        self.quantile_label = tk.Label(self.labels_bar2, text='value', bg='white')
+        self.quantile_label.pack(side=tk.LEFT, padx=5)
+
+        self.semiprob_bar = tk.Frame(self.left_frame, width=200, height=30, bg='white')
+        self.semiprob_bar.pack(side=tk.TOP, padx=5, pady=0, anchor=tk.NW)
+        self.text_box_alpha = tk.Text(self.semiprob_bar, width=5, height=1)
+        self.text_box_alpha.pack(side=tk.LEFT, padx=5)
+        self.text_box_beta = tk.Text(self.semiprob_bar, width=5, height=1)
+        self.text_box_beta.pack(side=tk.LEFT, padx=5)
+        self.text_box_gamma = tk.Text(self.semiprob_bar, width=6, height=1)
+        self.text_box_gamma.pack(side=tk.LEFT, padx=10)
+        self.text_box_quantile = tk.Text(self.semiprob_bar, width=5, height=1)
+        self.text_box_quantile.pack(side=tk.LEFT, padx=4)
 
 
-        self.right_frame = tk.Frame(width=400, height=500, bg='white')
-        self.right_frame.pack(side='right', fill='both', padx=10, pady=5, expand=True)
+
+
 
 
 
@@ -106,6 +133,7 @@ class GCView:
     def load_csv(self):
         csv_file_path = askopenfilename()
         self.controller.process_input(csv_file_path)
+
 
 
 
