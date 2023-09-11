@@ -25,9 +25,6 @@ class MyMenu(tk.Menu):
         parent.config(menu=self)
 
     def restart_program(self):
-        """Restarts the current program.
-        Note: this function does not return. Any cleanup action (like
-        saving data) must be done before calling this function."""
         python = sys.executable
         os.execl(python, python, *sys.argv)
 
@@ -103,6 +100,14 @@ class GCView:
         self.text_box_quantile.pack(side=tk.LEFT, padx=4)
 
 
+        self.postprocess_bar = tk.Frame(self.left_frame, width=200, height=30, bg='white')
+        self.postprocess_bar.pack(side=tk.TOP, padx=5, pady=25, anchor=tk.NW)
+        self.button_recalc = tk.Button(self.postprocess_bar, text='Recalculate', command=self.load_csv)
+        self.button_recalc.pack(side=tk.LEFT, padx=20, pady=5, anchor=tk.NW)
+        self.button_evaluate = tk.Button(self.postprocess_bar, text='Evaluate .csv', command=self.load_csv)
+        self.button_evaluate.pack(side=tk.RIGHT, padx=20, pady=5, anchor=tk.NW)
+
+
 
 
 
@@ -130,6 +135,7 @@ class GCView:
 
         self.button_tex = tk.Button(self.right_frame,  text="LaTeX export", background='white', command= lambda: self.controller.plot(Latex=True))
         self.button_tex.pack(side=tk.BOTTOM, anchor=tk.SE)
+
     def load_csv(self):
         csv_file_path = askopenfilename()
         self.controller.process_input(csv_file_path)
