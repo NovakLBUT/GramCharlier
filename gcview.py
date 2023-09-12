@@ -68,13 +68,13 @@ class GCView:
 
         self.moments_bar=tk.Frame(self.left_frame, width=200,  height=30,  bg='white')
         self.moments_bar.pack(side=tk.TOP, padx=5, pady=0, anchor=tk.NW)
-        self.text_box_mean=tk.Text(self.moments_bar, width=5, height=1)
+        self.text_box_mean=tk.Entry(self.moments_bar, width=7)
         self.text_box_mean.pack(side=tk.LEFT, padx=5)
-        self.text_box_variance = tk.Text(self.moments_bar, width=5, height=1)
+        self.text_box_variance = tk.Entry(self.moments_bar, width=7)
         self.text_box_variance.pack(side=tk.LEFT, padx=5)
-        self.text_box_skew = tk.Text(self.moments_bar, width=6, height=1)
+        self.text_box_skew = tk.Entry(self.moments_bar, width=7)
         self.text_box_skew.pack(side=tk.LEFT, padx=10)
-        self.text_box_kurt = tk.Text(self.moments_bar, width=5, height=1)
+        self.text_box_kurt = tk.Entry(self.moments_bar, width=7)
         self.text_box_kurt.pack(side=tk.LEFT, padx=4)
 
         self.labels_bar2 = tk.Frame(self.left_frame, width=200, height=30, bg='white')
@@ -90,19 +90,19 @@ class GCView:
 
         self.semiprob_bar = tk.Frame(self.left_frame, width=200, height=30, bg='white')
         self.semiprob_bar.pack(side=tk.TOP, padx=5, pady=0, anchor=tk.NW)
-        self.text_box_alpha = tk.Text(self.semiprob_bar, width=5, height=1)
+        self.text_box_alpha = tk.Entry(self.semiprob_bar, width=7)
         self.text_box_alpha.pack(side=tk.LEFT, padx=5)
-        self.text_box_beta = tk.Text(self.semiprob_bar, width=5, height=1)
+        self.text_box_beta = tk.Entry(self.semiprob_bar, width=7)
         self.text_box_beta.pack(side=tk.LEFT, padx=5)
-        self.text_box_gamma = tk.Text(self.semiprob_bar, width=6, height=1)
+        self.text_box_gamma = tk.Entry(self.semiprob_bar, width=7)
         self.text_box_gamma.pack(side=tk.LEFT, padx=10)
-        self.text_box_quantile = tk.Text(self.semiprob_bar, width=5, height=1)
+        self.text_box_quantile = tk.Entry(self.semiprob_bar, width=7)
         self.text_box_quantile.pack(side=tk.LEFT, padx=4)
 
 
         self.postprocess_bar = tk.Frame(self.left_frame, width=200, height=30, bg='white')
         self.postprocess_bar.pack(side=tk.TOP, padx=5, pady=25, anchor=tk.NW)
-        self.button_recalc = tk.Button(self.postprocess_bar, text='Recalculate', command=self.load_csv)
+        self.button_recalc = tk.Button(self.postprocess_bar, text='Recalculate', command=self.recalculate)
         self.button_recalc.pack(side=tk.LEFT, padx=20, pady=5, anchor=tk.NW)
         self.button_evaluate = tk.Button(self.postprocess_bar, text='Evaluate .csv', command=self.load_csv)
         self.button_evaluate.pack(side=tk.RIGHT, padx=20, pady=5, anchor=tk.NW)
@@ -139,6 +139,9 @@ class GCView:
     def load_csv(self):
         csv_file_path = askopenfilename()
         self.controller.process_input(csv_file_path)
+
+    def recalculate(self):
+        self.controller.recalculateGC()
 
 
 
