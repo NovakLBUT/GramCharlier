@@ -3,7 +3,7 @@ import sys
 import os
 from tkinter.filedialog import askopenfilename
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,
-NavigationToolbar2Tk)
+                                               NavigationToolbar2Tk)
 
 
 class Toolbar(NavigationToolbar2Tk):
@@ -43,28 +43,27 @@ class GCView:
         self.root.configure(background='white', pady=15, padx=15)
 
     def create_widgets(self):
-
         self.left_frame = tk.Frame(width=400, height=500, bg='white')
         self.left_frame.pack(side='left', fill='both', padx=10, pady=5, expand=True)
         self.right_frame = tk.Frame(width=400, height=500, bg='white')
         self.right_frame.pack(side='right', fill='both', padx=10, pady=5, expand=True)
-        self.button_csv = tk.Button(self.left_frame,text='Load .csv', command=self.load_csv)
-        self.button_csv.pack(side=tk.TOP,  padx=10, pady=5, anchor=tk.NW)
+        self.button_csv = tk.Button(self.left_frame, text='Load .csv', command=self.load_csv)
+        self.button_csv.pack(side=tk.TOP, padx=10, pady=5, anchor=tk.NW)
 
-        self.labels_bar=tk.Frame(self.left_frame, width=200,  height=30,  bg='white')
+        self.labels_bar = tk.Frame(self.left_frame, width=200, height=30, bg='white')
         self.labels_bar.pack(side=tk.TOP, padx=10, pady=5, anchor=tk.NW)
-        self.mean_label=tk.Label(self.labels_bar, text='Mean',  bg='white')
+        self.mean_label = tk.Label(self.labels_bar, text='Mean', bg='white')
         self.mean_label.pack(side=tk.LEFT, padx=5)
-        self.variance_label=tk.Label(self.labels_bar, text='Variance',  bg='white')
+        self.variance_label = tk.Label(self.labels_bar, text='Variance', bg='white')
         self.variance_label.pack(side=tk.LEFT, padx=5)
-        self.skew_label=tk.Label(self.labels_bar, text='Skewness',  bg='white')
+        self.skew_label = tk.Label(self.labels_bar, text='Skewness', bg='white')
         self.skew_label.pack(side=tk.LEFT, padx=5)
-        self.kurt_label=tk.Label(self.labels_bar, text='Kurtosis',  bg='white')
+        self.kurt_label = tk.Label(self.labels_bar, text='Kurtosis', bg='white')
         self.kurt_label.pack(side=tk.LEFT, padx=5)
 
-        self.moments_bar=tk.Frame(self.left_frame, width=200,  height=30,  bg='white')
+        self.moments_bar = tk.Frame(self.left_frame, width=200, height=30, bg='white')
         self.moments_bar.pack(side=tk.TOP, padx=5, pady=0, anchor=tk.NW)
-        self.text_box_mean=tk.Entry(self.moments_bar, width=7)
+        self.text_box_mean = tk.Entry(self.moments_bar, width=7)
         self.text_box_mean.pack(side=tk.LEFT, padx=5)
         self.text_box_variance = tk.Entry(self.moments_bar, width=7)
         self.text_box_variance.pack(side=tk.LEFT, padx=5)
@@ -105,7 +104,6 @@ class GCView:
         self.menubar = MyMenu(self.root)
 
     def plot_results(self, fig):
-
         self.canvasmaster = tk.Canvas(self.right_frame, bg='white')
         self.canvasmaster.pack()
         self.canvas = FigureCanvasTkAgg(fig, self.canvasmaster)
@@ -122,7 +120,8 @@ class GCView:
         self.canvas.get_tk_widget().pack(side=tk.TOP, anchor=tk.NE)
         self.frametoolbar.pack(side=tk.BOTTOM, anchor=tk.SE)
 
-        self.button_tex = tk.Button(self.right_frame,  text="LaTeX export", background='white', command= lambda: self.controller.plot(Latex=True))
+        self.button_tex = tk.Button(self.right_frame, text="LaTeX export", background='white',
+                                    command=lambda: self.controller.plot(Latex=True))
         self.button_tex.pack(side=tk.BOTTOM, anchor=tk.SE)
 
     def load_csv(self):
@@ -131,8 +130,3 @@ class GCView:
 
     def recalculate(self):
         self.controller.recalculateGC()
-
-
-
-
-

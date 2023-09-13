@@ -4,7 +4,6 @@ from gcview import GCView
 from gccontroller import GCController
 
 if __name__ == "__main__":
-
     root = tk.Tk()
     model = GramCharlier()
     view = GCView(root, None)

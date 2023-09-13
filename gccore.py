@@ -2,18 +2,19 @@ import numpy as np
 from scipy import stats as sc
 import pandas as pd
 
+
 class GramCharlier(object):
     def __init__(self):
-        
+
         self.moments = None
-        self.alpha=None
-        self.beta=None
-        self.gamma=None
+        self.alpha = None
+        self.beta = None
+        self.gamma = None
 
     def estimate_quantile(self, coeffs):
-        self.alpha=coeffs[0]
-        self.beta=coeffs[1]
-        self.gamma=coeffs[2]
+        self.alpha = coeffs[0]
+        self.beta = coeffs[1]
+        self.gamma = coeffs[2]
         self.bisect()
 
     def bisect(self, eps=0.001):
@@ -24,7 +25,7 @@ class GramCharlier(object):
         low = self.moments[0] - 5 * np.sqrt(self.moments[1])
         high = self.moments[0] + 5 * np.sqrt(self.moments[1])
         midpoint = (low + high) / 2.0
-        diff=high-low
+        diff = high - low
         while diff > eps:
 
             if samesign(self.inv_cdf(low), self.inv_cdf(high)):
@@ -32,9 +33,9 @@ class GramCharlier(object):
             else:
                 high = midpoint
             midpoint = (low + high) / 2.0
-            diff = high-low
+            diff = high - low
 
-        self.quantile = midpoint/self.gamma
+        self.quantile = midpoint / self.gamma
 
     def estimate_moments(self, file):
         df = pd.read_csv(file, sep=';', header=0)
@@ -44,7 +45,7 @@ class GramCharlier(object):
         skewness = sc.skew(self.samples)[0]
         kurt = sc.kurtosis(self.samples)[0] + 3
         self.moments = [mean, variance, skewness, kurt]
-        
+
     def normalized_hermite(self, N):
         plist = [None] * N
         plist[0] = np.poly1d(1)
