@@ -37,10 +37,6 @@ class GCView:
         self.config_root()
         self.create_widgets()
 
-
-
-
-
     def config_root(self):
         self.root.title("Gram-Charlier Expansion")
         self.root.geometry("800x500")
@@ -99,19 +95,12 @@ class GCView:
         self.text_box_quantile = tk.Entry(self.semiprob_bar, width=7)
         self.text_box_quantile.pack(side=tk.LEFT, padx=4)
 
-
         self.postprocess_bar = tk.Frame(self.left_frame, width=200, height=30, bg='white')
         self.postprocess_bar.pack(side=tk.TOP, padx=5, pady=25, anchor=tk.NW)
         self.button_recalc = tk.Button(self.postprocess_bar, text='Recalculate', command=self.recalculate)
         self.button_recalc.pack(side=tk.LEFT, padx=20, pady=5, anchor=tk.NW)
         self.button_evaluate = tk.Button(self.postprocess_bar, text='Evaluate .csv', command=self.load_csv)
         self.button_evaluate.pack(side=tk.RIGHT, padx=20, pady=5, anchor=tk.NW)
-
-
-
-
-
-
 
         self.menubar = MyMenu(self.root)
 

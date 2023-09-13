@@ -2,9 +2,6 @@ import numpy as np
 from scipy import stats as sc
 import pandas as pd
 
-
-
-
 class GramCharlier(object):
     def __init__(self):
         
@@ -12,7 +9,6 @@ class GramCharlier(object):
         self.alpha=None
         self.beta=None
         self.gamma=None
-
 
     def estimate_quantile(self, coeffs):
         self.alpha=coeffs[0]
