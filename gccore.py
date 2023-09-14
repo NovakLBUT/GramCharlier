@@ -11,6 +11,16 @@ class GramCharlier(object):
         self.beta = None
         self.gamma = None
 
+    def eval_distrib(self, file):
+        df = pd.read_csv(file, sep=';', header=0)
+        points = df.to_numpy()
+        evalpdf = self.pdf(points)
+        evalcdf = self.cdf(points)
+
+        distribs = np.concatenate([evalpdf, evalcdf]).reshape(-1, 2)
+        distribs = pd.DataFrame(distribs)
+        distribs.to_csv(file.replace('.csv', '_distrib.csv'), header=['pdf', 'cdf'], sep=';')
+
     def estimate_quantile(self, coeffs):
         self.alpha = coeffs[0]
         self.beta = coeffs[1]

@@ -95,11 +95,15 @@ class GCView:
         self.text_box_quantile.pack(side=tk.LEFT, padx=4)
 
         self.postprocess_bar = tk.Frame(self.left_frame, width=200, height=30, bg='white')
-        self.postprocess_bar.pack(side=tk.TOP, padx=5, pady=25, anchor=tk.NW)
+        self.postprocess_bar.pack(side=tk.TOP, padx=0, pady=25, anchor=tk.NW)
         self.button_recalc = tk.Button(self.postprocess_bar, text='Recalculate', command=self.recalculate)
-        self.button_recalc.pack(side=tk.LEFT, padx=20, pady=5, anchor=tk.NW)
-        self.button_evaluate = tk.Button(self.postprocess_bar, text='Evaluate .csv', command=self.load_csv)
-        self.button_evaluate.pack(side=tk.RIGHT, padx=20, pady=5, anchor=tk.NW)
+        self.button_recalc.pack(side=tk.LEFT, padx=5, pady=5, anchor=tk.NW)
+        self.button_evaluate = tk.Button(self.postprocess_bar, text='PDF & CDF',
+                                         command=lambda: self.load_csv(task='distribution'))
+        self.button_evaluate.pack(side=tk.RIGHT, padx=5, pady=5, anchor=tk.NW)
+        self.button_inverse = tk.Button(self.postprocess_bar, text="Inverse CDF",
+                                         command=lambda: self.load_csv(task='inverse'))
+        self.button_inverse.pack(side=tk.RIGHT, padx=5, pady=5, anchor=tk.NW)
 
         self.menubar = MyMenu(self.root)
 
@@ -124,9 +128,15 @@ class GCView:
                                     command=lambda: self.controller.plot(Latex=True))
         self.button_tex.pack(side=tk.BOTTOM, anchor=tk.SE)
 
-    def load_csv(self):
+    def load_csv(self, task='process'):
         csv_file_path = askopenfilename()
-        self.controller.process_input(csv_file_path)
+
+        if task == 'process':
+            self.controller.process_input(csv_file_path)
+        elif task == 'inverse':
+            self.controller.evaluate_inverse(csv_file_path)
+        elif task == 'distribution':
+            self.controller.evaluate_distrib(csv_file_path)
 
     def recalculate(self):
         self.controller.recalculateGC()

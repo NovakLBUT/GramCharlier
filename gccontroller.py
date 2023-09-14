@@ -13,6 +13,12 @@ class GCController:
         for child in self.view.right_frame.winfo_children():
             child.destroy()
 
+    def evaluate_inverse(self, csv_file):
+        print('test')
+
+    def evaluate_distrib(self, csv_file):
+        self.model.eval_distrib(csv_file)
+
     def process_input(self, csv_file):
         self.model.estimate_moments(csv_file)
         self.clearplot()
