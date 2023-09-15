@@ -14,7 +14,7 @@ class GCController:
             child.destroy()
 
     def evaluate_inverse(self, csv_file):
-        print('test')
+        self.model.eval_invcdf(csv_file)
 
     def evaluate_distrib(self, csv_file):
         self.model.eval_distrib(csv_file)
@@ -75,7 +75,7 @@ class GCController:
         for child in self.view.semiprob_bar.winfo_children():
             if type(child) == tk.Entry:
                 if len(child.get()) > 0:
-                    if float(child.get()) > 0:
+                    if float(child.get()) != 0:
                         input_check[i] = 1
             i = i + 1
 
