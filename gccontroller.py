@@ -99,6 +99,7 @@ class GCController:
         self.plot()
 
     def plot(self, Latex=False, n_bins=None):
+        plt.rcParams['savefig.dpi'] = 800
         if Latex:
             plt.rcParams['axes.linewidth'] = 0.5
             plt.rcParams['text.usetex'] = True

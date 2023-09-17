@@ -5,6 +5,9 @@ from tkinter.filedialog import askopenfilename
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,
                                                NavigationToolbar2Tk)
 
+import webbrowser
+
+
 
 class Toolbar(NavigationToolbar2Tk):
 
@@ -18,7 +21,7 @@ class MyMenu(tk.Menu):
         tk.Menu.__init__(self, parent)
         fileMenu = tk.Menu(self, tearoff=0)
         self.add_cascade(label="Main", underline=0, menu=fileMenu)
-        fileMenu.add_command(label="About", underline=1)
+        fileMenu.add_command(label="About",  command=self.open_manual)
         fileMenu.add_command(label="Restart", underline=1, command=self.restart_program)
         fileMenu.add_separator()
         fileMenu.add_command(label="Exit", underline=1, command=parent.destroy)
@@ -27,6 +30,9 @@ class MyMenu(tk.Menu):
     def restart_program(self):
         python = sys.executable
         os.execl(python, python, *sys.argv)
+
+    def open_manual(self):
+        webbrowser.open('https://www.fce.vutbr.cz/stm/novak.l/GCexp/manual.pdf', new=1, autoraise=True)
 
 
 class GCView:
@@ -39,7 +45,7 @@ class GCView:
 
     def config_root(self):
         self.root.title("Gram-Charlier Expansion")
-        self.root.geometry("800x500")
+        self.root.geometry("800x530")
         self.root.configure(background='white', pady=15, padx=15)
 
     def create_widgets(self):
